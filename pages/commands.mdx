@@ -1,0 +1,123 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Display, Code, Spacer } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Commands',
+}
+
+### Create Command
+
+In `func`, creating a command is very simple, you just need to add `Command` annotations for any class:
+
+<Display width="500px" caption={<>Create a command in file <Code>apple.ts</Code></>}>
+
+```ts
+@Command({
+  name: 'apple',
+})
+export class MyFirstCommand {
+  constructor() {
+    console.log('ok')
+  }
+}
+```
+
+</Display>
+
+Assuming the name of your command line tool is `hello-func`, you only need to run `hello-func apple` and the terminal will display `ok`.
+Everything is achieved in this way.
+
+<Spacer y={3} />
+
+### Create Option
+
+We know that there are usually some top-level options for command-line tools too.
+Taking your "tools" as an example, you may want its functions, such as `<command> --version` and so on available for support.
+
+Here, we can use the `Option` decorator to realize very elegantly:
+
+<Display width="500px" caption={<>Create a option command in file <Code>version.ts</Code></>}>
+
+```ts
+import { Option } from 'func'
+
+@Option({
+  name: 'version',
+  alias: 'v',
+})
+export class Version {
+  constructor() {
+    console.log('1.0.0')
+  }
+}
+```
+
+</Display>
+
+After adding some information to your class `Version`, it will be triggered when `--version` and `-v`, `-v` is its alias.
+
+The `func` allows you to create aliases for any command.
+if it is an alias for the `Option` command, only a `-` is required to use it, which is also standard.
+
+<Spacer y={3} />
+
+### Create Sub-options
+
+Inside the func, a decorator `SubOptions` is also ready for you to implement this type of command `<command> --<option>`:
+
+<Display width="500px" caption={<>Create a command containing suboption in file <Code>apple.ts</Code></>}>
+
+```ts
+@Command({
+  name: 'apple',
+})
+@SubOptions([{ name: 'help', alias: 'h' }])
+export class MyFirstSubOption {
+  constructor(private arg: CommandArgsProvider) {
+    if (arg.option.help) {
+      console.log('HELP MESSAGE: The apple is red')
+    }
+  }
+}
+```
+
+</Display>
+
+Refer to the chapter of [Parameters](/params.md) for how to get the values of options.
+
+<Spacer y={3} />
+
+### Create Main Command
+
+The main command refers to that scenario that only the name of your command line is run without carrying any parameters:
+
+```ts
+import { CommandMajor } from 'func'
+
+@CommandMajor()
+export class Main {}
+```
+
+If your tool of command lines is still called `hello-func`, then just running `hello-func` will trigger the main command.
+
+<Spacer y={3} />
+
+### Get Missing Command
+
+In a few cases, users may enter parameters or commands incorrectly.
+You need to guide the user with some tips of information kindly given. `CommandMissing` is used to solve this problem.
+Without any `Command` or `Option` found, being unable to be found will be triggered:
+
+```ts
+import { CommandMissing } from 'func'
+
+@CommandMissing()
+export class Missing {
+  constructor() {
+    console.log('not found any commands!')
+  }
+}
+```
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>

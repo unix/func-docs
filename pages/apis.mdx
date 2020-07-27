@@ -1,0 +1,89 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Display, Code, Spacer, Table } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'APIs',
+}
+
+### Command
+
+All annotations used to create commands directly.
+
+<Spacer y={1} />
+
+export const CommandAPI = [
+  {
+    signature: '@Command(params: CommandParams)',
+    structure: 'CommandParams = { name: string, description?: string, alias?: string }',
+    description: 'create command',
+  },
+  {
+    signature: '@Option(params: OptionParams)',
+    structure:
+      'OptionParams = { name: string, type?: OptionType, description?: string, alias?: string }',
+    description: 'create option',
+  },
+  {
+    signature: '@SubOptions(params: Array<OptionParams>)',
+    structure: 'ditto',
+    description: (
+      <span>
+        create a suboption, usually used after <Code>Command</Code>
+      </span>
+    ),
+  },
+  {
+    signature: '@CommandMissing()',
+    structure: '-',
+    description: 'create a method to capture undeclared commands',
+  },
+  {
+    signature: '@CommandMajor()',
+    structure: '-',
+    description: 'main command',
+  },
+]
+
+<Table data={CommandAPI}>
+  <Table.Column prop="signature" label="Signature" />
+  <Table.Column prop="structure" label="Structure" />
+  <Table.Column prop="description" label="Description" />
+</Table>
+
+<Spacer y={3} />
+
+### Arguments
+
+All annotations used to get parameters.
+
+<Spacer y={1} />
+
+export const ArgumentsAPI = [
+  {
+    signature: 'CommandArgsProvider',
+    description: 'provide infos about the current command',
+  },
+  {
+    signature: 'OptionArgsProvider',
+    description: 'provide infos about the current option',
+  },
+  {
+    signature: 'RegisterProvider',
+    description: 'provide all registered metadata',
+  },
+]
+
+<Table data={ArgumentsAPI}>
+  <Table.Column prop="signature" label="Signature" />
+  <Table.Column prop="description" label="Description" />
+</Table>
+
+<Spacer y={3} />
+
+### Support
+
+- `func-service dev`: Reset development environment, point `bin` to development.
+- `func-service build`: Bundle all files, point `bin` to production.
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>

@@ -1,0 +1,64 @@
+import Layout from 'lib/components/layout'
+import NextLink from 'next/link'
+import { Text, Spacer, Display, Code, Image, Link, Divider } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Introduction',
+}
+
+### Introduction
+
+`func` is a modern command line framework that is lighter and more elegant compared with other products,
+with more scaffolding support and an excellent developer experience at the same time.
+
+`func` is realized by using `TypeScript`, which is easier to maintain and extend. Due to type support,
+you can get almost all the grammar tips. But don't worry, it's not complicated,
+only one command is required from development to packaging.
+
+You can create a project in seconds with <NextLink href="/guide"><Link color>Quick-start Guide.</Link></NextLink>
+
+<Spacer y={3} />
+
+### Features
+
+- Volume of very small packaging ≈ <Link color rel="nofollow" target="_blank" href="https://github.com/unix/func/blob/master/examples/gzbundle/archived.tar.gz">7 KB</Link>
+
+- Elegant grammar and without any thinking burden
+
+- Very few dependence, maximum optimized running speed and `npm` download time
+
+- Project template support
+
+<Spacer y={3} />
+
+### Why
+
+For the `func`, using the decorator's metadata to help command define is a very lightweight choice actually,
+**when most of the codes will not be brought into the running after the build**,
+it also provides a very good development experience. (such as tips, types, etc.)
+
+If you have any items that need to be rebuilt or started with a new item from the very beginning,
+then `func` is a very good choice, making the command-line tool built in a happy and simple manner with rich spirituality.
+
+<Spacer y={3} />
+
+### Links
+
+- <Link color rel="nofollow" target="_blank" href="https://github.com/unix/func">
+    GitHub
+  </Link>
+- <Link color rel="nofollow" target="_blank" href="https://github.com/unix/func-service">
+    Scaffolding service
+  </Link>
+- <Link
+    color
+    rel="nofollow"
+    target="_blank"
+    href="https://github.com/awesome-templates/func-template">
+    Template for func
+  </Link>
+- <Link color rel="nofollow" target="_blank" href="https://github.com/zeit-ui/react">
+    UI of document site
+  </Link>
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>

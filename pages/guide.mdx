@@ -1,0 +1,88 @@
+import Layout from 'lib/components/layout'
+import FuncFiles from 'lib/components/func-files'
+import NextLink from 'next/link'
+import { Tabs, Snippet, Link, Spacer, Note, Code } from '@zeit-ui/react'
+
+export const meta = {
+  title: 'Guide',
+}
+
+### Quick Start
+
+Ensure your have the latest version of <Link href="https://nodejs.org/en/download/">NodeJS</Link>,
+and a package manager: <Link target="_blank" rel="nofollow" href="https://www.npmjs.com/">NPM</Link> or <Link target="_blank" rel="nofollow" href="https://yarnpkg.com/">Yarn</Link>.
+Running the command immediately creates a basic `func` project:
+
+<Tabs initialValue="npm" hideDivider>
+  <Tabs.Item value="npm" label="NPM">
+    <Snippet text="npm init func" width="400px" />
+  </Tabs.Item>
+  <Tabs.Item value="yarn" label="Yarn">
+    <Snippet text="yarn create func" width="400px" />
+  </Tabs.Item>
+</Tabs>
+
+<Spacer y={3} />
+
+### Development
+
+After you create an initial project, you will see the following files:
+
+<FuncFiles />
+
+<Spacer />
+
+Before you start editing, you need to run the command to download the dependencies and setting up the development environment:
+
+<Tabs initialValue="npm" hideDivider>
+  <Tabs.Item value="npm" label="NPM">
+    <Snippet text={['npm i', 'npm run start']} width="400px" />
+  </Tabs.Item>
+  <Tabs.Item value="yarn" label="Yarn">
+    <Snippet text={['yarn', 'yarn start']} width="400px" />
+  </Tabs.Item>
+</Tabs>
+
+<Spacer />
+
+So far, all the preparations have been completed.
+
+You can browse the examples in `commands` / `options`,
+try to modify them and make your commands run to see how it goes.
+For example, suppose your project name is `my-first-command`, then you can run `my-first-command hello` directly.
+
+<Spacer y={3} />
+
+### Bundle
+
+If you use the template to create an item, you only need to execute one command to package the item:
+
+<Tabs initialValue="npm" hideDivider>
+  <Tabs.Item value="npm" label="NPM">
+    <Snippet text={['npm build']} width="400px" />
+  </Tabs.Item>
+  <Tabs.Item value="yarn" label="Yarn">
+    <Snippet text={['yarn build']} width="400px" />
+  </Tabs.Item>
+</Tabs>
+
+<Spacer />
+
+After running the command, your project is packaged. It is very simple, isn't it?
+
+When you use `func`, you never need to consider `bin` and file updates, or any soft link problems,
+`func` handled everything automatically for you. Now, you can publish it immediately.
+
+<Spacer />
+
+<Note>
+  If you need to return to the mode of development, just run <Code>npm run start</Code> again.
+</Note>
+
+<Spacer y={3} />
+
+### Publish
+
+Try publishing your package directly on NPM with `npm publish`!
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>
